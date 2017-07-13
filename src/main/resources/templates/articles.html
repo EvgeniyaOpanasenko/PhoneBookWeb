@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Phoe Book</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+
+<h3>User Contacts Details</h3>
+<div>
+    Logged in user: <b th:inline="text" class="user"> [[${#httpServletRequest.remoteUser}]] </b>
+    <form th:action="@{/app-logout}" method="POST">
+        <input type="submit" value="Logout"/>
+    </form>
+</div>
+<br/>
+
+<div>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>FIO</th>
+            <th>Cell Phone</th>
+            <th>Home Phone</th>
+            <th>Mail</th>
+            <th>Address</th>
+        </tr>
+        <tr th:each="contact : ${userContacts}">
+            <td th:text="${contact.id}"></td>
+            <td th:text="${contact.fio}"></td>
+            <td th:text="${contact.cellPhone}"></td>
+            <td th:text="${contact.homePhone}"></td>
+            <td th:text="${contact.mail}"></td>
+            <td th:text="${contact.address}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>   
