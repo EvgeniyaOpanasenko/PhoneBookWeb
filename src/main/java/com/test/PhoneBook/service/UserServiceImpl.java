@@ -1,7 +1,5 @@
 package com.test.PhoneBook.service;
 
-
-import com.test.PhoneBook.dao.ContactRepository;
 import com.test.PhoneBook.dao.UserRepository;
 import com.test.PhoneBook.model.Contact;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +11,6 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-
 
 
     @Override
