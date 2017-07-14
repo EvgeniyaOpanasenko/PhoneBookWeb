@@ -14,6 +14,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
+
+
     @Override
     public List<Contact> getAllUserContacts() {
         return null;
