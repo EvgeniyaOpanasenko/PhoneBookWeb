@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService {
     private IUserInfoDAO userInfoDAO;
 
     @Override
-    public List<Contact> getAllUserArticles() {
+    public List<Contact> getAllUserContacts() {
         return userInfoDAO.getAllUserContacts();
     }
 }

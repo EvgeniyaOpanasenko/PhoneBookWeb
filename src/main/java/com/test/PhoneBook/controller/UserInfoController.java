@@ -21,11 +21,11 @@ public class UserInfoController {
         return mav;
     }
 
-    @GetMapping("secure/article-details")
+    @GetMapping("secure/contact-details")
     public ModelAndView getAllUserArticles() {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("userContacts", userInfoService.getAllUserArticles());
-        mav.setViewName("articles");
+        mav.addObject("userContacts", userInfoService.getAllUserContacts());
+        mav.setViewName("contacts");
         return mav;
     }
 

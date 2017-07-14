@@ -1,7 +1,6 @@
 package com.test.PhoneBook.config;
 
 
-
 import com.test.PhoneBook.dao.IUserInfoDAO;
 import com.test.PhoneBook.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +16,16 @@ import java.util.Arrays;
 
 @Service
 public class MyAppUserDetailsService implements UserDetailsService {
-	@Autowired
-	private IUserInfoDAO userInfoDAO;
-	@Override
-	public UserDetails loadUserByUsername(String userName)
-			throws UsernameNotFoundException {
-		UserInfo activeUserInfo = userInfoDAO.getActiveUser(userName);
-		GrantedAuthority authority = new SimpleGrantedAuthority(activeUserInfo.getRole());
-		UserDetails userDetails = (UserDetails)new User(activeUserInfo.getUserName(),
-				activeUserInfo.getPassword(), Arrays.asList(authority));
-		return userDetails;
-	}
+    @Autowired
+    private IUserInfoDAO userInfoDAO;
+
+    @Override
+    public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+        UserInfo activeUserInfo = userInfoDAO.getActiveUser(userName);
+        GrantedAuthority authority = new SimpleGrantedAuthority(activeUserInfo.getRole());
+        UserDetails userDetails = (UserDetails) new User(activeUserInfo.getUserName(),
+                activeUserInfo.getPassword(), Arrays.asList(authority));
+        return userDetails;
+    }
 }
 

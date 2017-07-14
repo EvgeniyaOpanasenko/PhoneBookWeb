@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserService {
 	 @Secured({"ROLE_ADMIN"})
-     List<Contact> getAllUserArticles();
+     List<Contact> getAllUserContacts();
 }
