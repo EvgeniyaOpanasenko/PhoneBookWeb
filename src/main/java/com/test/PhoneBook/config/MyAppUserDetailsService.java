@@ -1,6 +1,5 @@
 package com.test.PhoneBook.config;
 
-
 import com.test.PhoneBook.dao.UserRepository;
 import com.test.PhoneBook.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
