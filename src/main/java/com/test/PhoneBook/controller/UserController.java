@@ -1,6 +1,7 @@
 package com.test.PhoneBook.controller;
 
 
+import com.test.PhoneBook.service.ContactService;
 import com.test.PhoneBook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("app")
-public class UserInfoController {
+public class UserController {
     @Autowired
-    private UserService userInfoService;
+    private UserService userService;
+
+    @Autowired
+    private ContactService contactService;
 
     @GetMapping("login")
     public ModelAndView login() {
@@ -24,7 +28,7 @@ public class UserInfoController {
     @GetMapping("secure/contact-details")
     public ModelAndView getAllUserArticles() {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("userContacts", userInfoService.getAllUserContacts());
+        mav.addObject("userContacts", contactService.getAllContacts());
         mav.setViewName("contacts");
         return mav;
     }

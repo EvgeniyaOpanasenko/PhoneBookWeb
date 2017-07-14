@@ -13,11 +13,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private ContactRepository contactRepository;
 
     @Override
     public List<Contact> getAllUserContacts() {
-        return (List<Contact>) contactRepository.findAll();
+        return null;
     }
 }
