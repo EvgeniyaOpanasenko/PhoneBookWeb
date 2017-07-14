@@ -1,6 +1,5 @@
 package com.test.PhoneBook.service;
 
-
 import com.test.PhoneBook.model.Contact;
 import org.springframework.security.access.annotation.Secured;
 
