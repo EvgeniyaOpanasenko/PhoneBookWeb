@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @GetMapping("secure/contact-details")
-    public ModelAndView getAllUserArticles() {
+    public ModelAndView getAllUserContacts() {
         ModelAndView mav = new ModelAndView();
         mav.addObject("userContacts", contactService.getAllContacts());
         mav.setViewName("contacts");
