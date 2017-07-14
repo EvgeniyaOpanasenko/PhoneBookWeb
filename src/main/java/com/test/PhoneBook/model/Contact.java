@@ -20,7 +20,6 @@ public class Contact implements Serializable {
     private String address;
     private String mail;
 
-    /*@JsonIgnore*/
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "id")
     private UserInfo author;
