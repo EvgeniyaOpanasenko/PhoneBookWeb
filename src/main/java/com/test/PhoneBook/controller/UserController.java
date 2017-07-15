@@ -6,6 +6,8 @@ import com.test.PhoneBook.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -17,6 +19,11 @@ public class UserController {
 
     @Autowired
     private ContactService contactService;
+
+    @RequestMapping("/")
+    public String index() {
+        return "index";
+    }
 
     @GetMapping("login")
     public ModelAndView login() {
@@ -41,4 +48,12 @@ public class UserController {
         mav.setViewName("403");
         return mav;
     }
+
+    /*@PostMapping("signup")
+    public ModelAndView signup(@ModelAttribute("userForm")) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("userContacts", contactService.getAllContacts());
+        mav.setViewName("contacts");
+        return mav;
+    }*/
 } 

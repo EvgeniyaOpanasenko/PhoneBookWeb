@@ -10,6 +10,9 @@ import java.util.List;
 @Service
 public class ContactServiceImpl implements ContactService {
 
+    /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    String name = auth.getName(); //get logged in username*/
+
     @Autowired
     private ContactRepository contactRepository;
 
