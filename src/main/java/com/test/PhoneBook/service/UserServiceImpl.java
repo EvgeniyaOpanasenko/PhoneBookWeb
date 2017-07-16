@@ -2,6 +2,7 @@ package com.test.PhoneBook.service;
 
 import com.test.PhoneBook.dao.UserRepository;
 import com.test.PhoneBook.model.Contact;
+import com.test.PhoneBook.model.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,5 +16,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Contact> getAllUserContacts() {
         return null;
+    }
+
+    @Override
+    public UserInfo saveNewUser(UserInfo accountDto) {
+        return userRepository.save(accountDto);
+    }
+
+    @Override
+    public void create(UserInfo user) {
+        userRepository.save(user);
     }
 }

@@ -26,6 +26,21 @@ public class UserInfo implements Serializable {
     @OneToMany(mappedBy = "author")
     List<Contact> contactList;
 
+    public UserInfo() {
+    }
+
+
+    public UserInfo(String userName, String password, String role, short enabled) {
+        this.userName = userName;
+        this.password = "123";
+        this.role = "ROLE_USER";
+        this.enabled = 1;
+    }
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
     public String getUserName() {
         return userName;
     }

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<h1>Registration</h1>
+<form action="#" th:action="@{/app/create-user}" th:object="${user}" method="POST">
+    <table>
+        <tr>
+            User Name : <input type="text" name="userName"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('userName')}" th:class="'error'">Name Error</label>
+        </tr>
+        <tr>
+            Password : <input type="password" name="password"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('password')}" th:class="'error'">Password Error</label>
+        </tr>
+       <!-- <tr>
+            Password : <input type="text" name="passsword"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('password')}" th:class="'error'">Password Error</label>
+        </tr>
+        <tr>
+            Full Nmae : <input type="text" name="full_name"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('full_name')}" th:class="'error'">Full Name Error</label>
+        </tr>-->
+
+        <tr><td colspan="2">
+            <input type="submit" name="Submit"/>
+            <input type="reset"  name="Reset"/>
+        </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
