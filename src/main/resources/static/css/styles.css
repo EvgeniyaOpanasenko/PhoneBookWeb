@@ -74,3 +74,11 @@ ul#messages li.error {
     color: red;
     font-style: italic;
 }
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}

@@ -5,6 +5,8 @@ import com.test.PhoneBook.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,9 +31,22 @@ public class UserController {
     @GetMapping("secure/contact-details")
     public ModelAndView getAllUserContacts() {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("userContacts", contactService.getAllContacts());
-        mav.setViewName("contacts");
-        logger.info("All users shown");
+
+        String role = userService.getLoggedInUserRole();
+        String name = userService.getLoggedInUserName();
+
+        if (role.equals("ROLE_ADMIN")) {
+            mav.addObject("userContacts", contactService.getAllContacts());
+            mav.setViewName("contacts");
+            logger.info("All users collected by author ADMIN");
+        } else {
+            mav.addObject("userContacts", contactService.getAllContactsByAuthor(name));
+            mav.setViewName("contacts");
+            logger.info("All users collected for USER");
+        }
+
+       /* mav.addObject("userContacts", contactService.getAllContacts());
+        mav.setViewName("contacts");*/
         return mav;
     }
 

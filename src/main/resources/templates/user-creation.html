@@ -4,6 +4,7 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
+<header th:replace="layout :: site-header"/>
 <h1>Registration</h1>
 <form action="#" th:action="@{/app/create-user}" th:object="${user}" method="POST">
     <table>
@@ -31,5 +32,6 @@
         </tr>
     </table>
 </form>
+<footer th:replace="layout :: site-footer"/>
 </body>
 </html>

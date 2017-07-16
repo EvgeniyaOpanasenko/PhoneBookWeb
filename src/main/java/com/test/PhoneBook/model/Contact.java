@@ -19,7 +19,7 @@ public class Contact implements Serializable {
     private String mail;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "username", referencedColumnName = "id")
+    @JoinColumn(name = "userName", referencedColumnName = "id")
     private UserInfo author;
 
     public Contact() {

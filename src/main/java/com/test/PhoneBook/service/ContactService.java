@@ -10,7 +10,9 @@ public interface ContactService {
     @Secured({"ROLE_ADMIN"})
     List<Contact> getAllContacts();
 
-    boolean addContact(Contact contact);
+    List<Contact> getAllContactsByAuthor(String author);
+
+    Contact addContact(Contact contact);
 
     boolean deleteContact(Contact contact);
 

@@ -18,7 +18,7 @@ import javax.validation.Valid;
 @RequestMapping("app")
 public class RegistrationUserController {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationUserController.class);
 
     @Autowired
     private UserService userService;
@@ -35,7 +35,7 @@ public class RegistrationUserController {
     public ModelAndView createUser(@Valid UserInfo user, BindingResult result) {
         ModelAndView mav = new ModelAndView();
         if (result.hasErrors()) {
-            logger.info("Validation errors while submitting form.");
+            logger.info("Validation errors while submitting form");
             mav.setViewName("user-creation");
             mav.addObject("user", user);
             return mav;
@@ -49,8 +49,8 @@ public class RegistrationUserController {
         registration.setRole("ROLE_USER");
         userService.create(registration);
         mav.setViewName("login");
-        //logIn(user);
-        logger.info("User created successfully.");
+        //TODO logIn(user);
+        logger.info("User created successfully");
         return mav;
     }
 

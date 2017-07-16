@@ -1,6 +1,7 @@
 package com.test.PhoneBook.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -11,6 +12,7 @@ public class UserInfo implements Serializable {
 
     @Id
     @Column(name = "id")
+    @NotNull
     private String userName;
 
     private String password;
