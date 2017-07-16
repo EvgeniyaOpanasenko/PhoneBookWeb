@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Phone Book</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+<header th:replace="layout :: site-header"/>
+<div>
+    <p th:if="${param.error}" class="error">
+        Bad Credentials
+    </p>
+    <form th:action="@{/app-register}" method="POST">
+        User Name : <input type="text" name="app_username"/> <br/><br/>
+        Password: <input type="password" name="app_password"/> <br/><br/>
+        Full Name: <input type="text" name="app_fullName"/> <br/><br/>
+        Address: <input type="text" name="app_address"/> <br/><br/>
+        Mail: <input type="email" name="app_mail"/> <br/><br/>
+        <input type="submit" value="Login"/>
+        <div class="form-group">
+        </div>
+    </form>
+</div>
+<footer th:replace="layout :: site-footer"/>
+</body>
+</html>

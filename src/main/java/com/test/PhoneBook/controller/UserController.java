@@ -28,7 +28,7 @@ public class UserController {
     @GetMapping("login")
     public ModelAndView login() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("custom-login");
+        mav.setViewName("login");
         return mav;
     }
 
@@ -49,11 +49,5 @@ public class UserController {
         return mav;
     }
 
-    /*@PostMapping("signup")
-    public ModelAndView signup(@ModelAttribute("userForm")) {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("userContacts", contactService.getAllContacts());
-        mav.setViewName("contacts");
-        return mav;
-    }*/
+
 } 
