@@ -14,7 +14,7 @@
         <a href="login.html" th:href="@{/app/login}">Login</a>
         <a href="user-creation.html" th:href="@{/app/create-user}">Register</a>
         <a href="contacts.html" th:href="@{/app/secure/contact-details}">Conatcs</a>
-        <a href="contacts/create.html" th:href="@{/contact/create}">Create Post</a>
+        <a href="contact-creation.html" th:href="@{/app/contact/creation}">Create Create</a>
         <div id="logged-in-info">
             <span>Hello,<b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b></span>
             <form method="post" th:action="@{/app-logout}">

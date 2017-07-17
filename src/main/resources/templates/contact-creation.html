@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<header th:replace="layout :: site-header"/>
+<h1>Registration</h1>
+<form action="#" th:action="@{/app/contact/creation}" th:object="${contact}" method="POST">
+    <table>
+        <tr>
+            Full Name : <input type="text" name="fio"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('fio')}" th:class="'error'">Name Error</label>
+        </tr>
+
+        <tr>
+            Cell Phone : <input type="text" name="cellPhone"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('cellPhone')}" th:class="'error'">Password Error</label>
+        </tr>
+
+        <tr>
+            Home Phone : <input type="text" name="homePhone"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('homePhone')}" th:class="'error'">Password Error</label>
+        </tr>
+
+        <tr>
+            Address : <input type="text" name="address"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('address')}" th:class="'error'">Password Error</label>
+        </tr>
+
+
+        <tr>
+            Mail : <input type="text" name="mail"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('mail')}" th:class="'error'">Password Error</label>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="Submit"/>
+                <input type="reset" name="Reset"/>
+            </td>
+        </tr>
+    </table>
+</form>
+<footer th:replace="layout :: site-footer"/>
+</body>
+</html>
