@@ -1,38 +1,31 @@
 package com.test.PhoneBook.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class UserInfo implements Serializable {
+public class UserDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @Column(name = "id")
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     private String userName;
-
     private String password;
-
     private String role;
-
     private String fullName;
-
-    private String country;
-
     private short enabled;
 
-    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
     List<Contact> contactList;
 
-    public UserInfo() {
+    public UserDto() {
     }
 
-
-    public UserInfo(String userName, String password, String role, short enabled) {
+    public UserDto(String userName, String password, String role, short enabled) {
         this.userName = userName;
         this.password = "123";
         this.role = "ROLE_USER";
@@ -75,14 +68,6 @@ public class UserInfo implements Serializable {
         this.fullName = fullName;
     }
 
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
     public short getEnabled() {
         return enabled;
     }
@@ -97,5 +82,13 @@ public class UserInfo implements Serializable {
 
     public void setContactList(List<Contact> contactList) {
         this.contactList = contactList;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

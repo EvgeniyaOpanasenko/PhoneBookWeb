@@ -1,7 +1,7 @@
 package com.test.PhoneBook.config;
 
 import com.test.PhoneBook.dao.UserRepository;
-import com.test.PhoneBook.model.UserInfo;
+import com.test.PhoneBook.model.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,10 +20,10 @@ public class MyAppUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        UserInfo activeUserInfo = userRepository.findByUserName(userName);
-        GrantedAuthority authority = new SimpleGrantedAuthority(activeUserInfo.getRole());
-        UserDetails userDetails = (UserDetails) new User(activeUserInfo.getUserName(),
-                activeUserInfo.getPassword(), Arrays.asList(authority));
+        UserDto activeUserDto = userRepository.findByUserName(userName);
+        GrantedAuthority authority = new SimpleGrantedAuthority(activeUserDto.getRole());
+        UserDetails userDetails = (UserDetails) new User(activeUserDto.getUserName(),
+                activeUserDto.getPassword(), Arrays.asList(authority));
         return userDetails;
     }
 }

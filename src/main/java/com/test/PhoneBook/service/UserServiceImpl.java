@@ -1,9 +1,7 @@
 package com.test.PhoneBook.service;
 
-import com.test.PhoneBook.controller.UserController;
 import com.test.PhoneBook.dao.UserRepository;
-import com.test.PhoneBook.model.Contact;
-import com.test.PhoneBook.model.UserInfo;
+import com.test.PhoneBook.model.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
-    public void create(UserInfo user) {
+    public void create(UserDto user) {
         userRepository.save(user);
     }
 
@@ -41,8 +38,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserInfo> getAllUsers() {
-        return (List<UserInfo>) userRepository.findAll();
+    public List<UserDto> getAllUsers() {
+        return (List<UserDto>) userRepository.findAll();
     }
 
     @Override

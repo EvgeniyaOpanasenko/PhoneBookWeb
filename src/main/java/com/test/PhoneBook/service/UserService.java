@@ -1,16 +1,16 @@
 package com.test.PhoneBook.service;
 
-import com.test.PhoneBook.model.UserInfo;
+import com.test.PhoneBook.model.UserDto;
 
 import java.util.List;
 
 public interface UserService {
 
-    void create(UserInfo user);
+    void create(UserDto user);
 
     String getLoggedInUserRole();
 
-    List<UserInfo> getAllUsers();
+    List<UserDto> getAllUsers();
 
     String getLoggedInUserName();
 }

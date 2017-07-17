@@ -7,6 +7,7 @@ import java.io.Serializable;
 @Table(name = "contacts")
 public class Contact implements Serializable {
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -22,8 +23,8 @@ public class Contact implements Serializable {
     private String mail;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "userName", referencedColumnName = "id")
-    private UserInfo author;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private UserDto user;
 
     public Contact() {
     }
@@ -80,12 +81,12 @@ public class Contact implements Serializable {
         this.mail = mail;
     }
 
-    public UserInfo getAuthor() {
-        return author;
+    public UserDto getUser() {
+        return user;
     }
 
-    public void setAuthor(UserInfo author) {
-        this.author = author;
+    public void setUser(UserDto user) {
+        this.user = user;
     }
 
     public String getFirstName() {

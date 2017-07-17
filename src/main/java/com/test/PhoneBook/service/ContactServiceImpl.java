@@ -26,7 +26,7 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public List<Contact> getAllContactsByAuthor(String author) {
         List<Contact> contacts = getAllContacts().stream()
-                .filter(contact -> contact.getAuthor().getUserName()
+                .filter(contact -> contact.getUser().getUserName()
                         .equals(author)).collect(Collectors.toList());
         return contacts;
     }

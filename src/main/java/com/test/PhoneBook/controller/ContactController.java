@@ -1,7 +1,9 @@
 package com.test.PhoneBook.controller;
 
+import com.test.PhoneBook.dao.UserRepository;
 import com.test.PhoneBook.model.Contact;
 import com.test.PhoneBook.service.ContactService;
+import com.test.PhoneBook.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class ContactController {
 
     @Autowired
     private ContactService contactService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String contactDelete(@RequestParam(name="contactId")Long id) {
@@ -47,11 +52,10 @@ public class ContactController {
         }
 
         Contact newContact = new Contact();
-        newContact.setAuthor(contact.getAuthor());
-        newContact.setAddress(contact.getAddress());
-        newContact.setCellPhone(contact.getCellPhone());
-        newContact.setPatronymic(contact.getPatronymic());
         newContact.setHomePhone(contact.getHomePhone());
+        newContact.setCellPhone(contact.getCellPhone());
+        newContact.setAddress(contact.getAddress());
+        //newContact.setAuthor(userService.getLoggedInUserName());
 
         contactService.addContact(newContact);
         mav.setViewName("contacts");

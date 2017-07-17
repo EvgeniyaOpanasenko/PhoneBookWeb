@@ -1,6 +1,6 @@
 package com.test.PhoneBook.controller;
 
-import com.test.PhoneBook.model.UserInfo;
+import com.test.PhoneBook.model.UserDto;
 import com.test.PhoneBook.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,12 +27,12 @@ public class RegistrationUserController {
     public ModelAndView createUserView() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("user-creation");
-        mav.addObject("user", new UserInfo());
+        mav.addObject("user", new UserDto());
         return mav;
     }
 
     @PostMapping("create-user")
-    public ModelAndView createUser(@Valid UserInfo user, BindingResult result) {
+    public ModelAndView createUser(@Valid UserDto user, BindingResult result) {
         ModelAndView mav = new ModelAndView();
         if (result.hasErrors()) {
             logger.info("Validation errors while submitting form");
@@ -43,7 +43,7 @@ public class RegistrationUserController {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String hashedPassword = passwordEncoder.encode(user.getPassword());
-        UserInfo registration = new UserInfo();
+        UserDto registration = new UserDto();
         registration.setUserName(user.getUserName());
         registration.setPassword(hashedPassword);
         registration.setRole("ROLE_USER");
