@@ -8,9 +8,6 @@ public interface UserService {
 
     void create(UserDto user);
 
-    String getLoggedInUserRole();
-
     List<UserDto> getAllUsers();
 
-    String getLoggedInUserName();
 }

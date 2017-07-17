@@ -5,8 +5,6 @@ import com.test.PhoneBook.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,30 +21,15 @@ public class UserController {
     @Autowired
     private ContactService contactService;
 
-    @RequestMapping("/")
-    public String index() {
-        return "index";
-    }
-
     @GetMapping("secure/contact-details")
     public ModelAndView getAllUserContacts() {
         ModelAndView mav = new ModelAndView();
 
-        String role = userService.getLoggedInUserRole();
-        String name = userService.getLoggedInUserName();
+        mav.addObject("userContacts",
+                contactService.getAllContactsByCurrentlyLoggedInUser());
+        mav.setViewName("contacts");
+        logger.info("All contacts collected for USER");
 
-        if (role.equals("ROLE_ADMIN")) {
-            mav.addObject("userContacts", contactService.getAllContacts());
-            mav.setViewName("contacts");
-            logger.info("All contacts collected by author ADMIN");
-        } else {
-            mav.addObject("userContacts", contactService.getAllContactsByAuthor(name));
-            mav.setViewName("contacts");
-            logger.info("All contacts collected for USER");
-        }
-
-       /* mav.addObject("userContacts", contactService.getAllContacts());
-        mav.setViewName("contacts");*/
         return mav;
     }
 
