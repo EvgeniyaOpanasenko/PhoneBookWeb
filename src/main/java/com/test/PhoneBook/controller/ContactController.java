@@ -54,4 +54,6 @@ public class ContactController {
 
         return "redirect:/app/secure/contact-details";
     }
+
+
 }
