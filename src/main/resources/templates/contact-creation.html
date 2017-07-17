@@ -9,8 +9,8 @@
 <form action="#" th:action="@{/app/contact/creation}" th:object="${contact}" method="POST">
     <table>
         <tr>
-            Full Name : <input type="text" name="fio"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('fio')}" th:class="'error'">Name Error</label>
+            Full Name : <input type="text" name="patronymic"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('patronymic')}" th:class="'error'">Name Error</label>
         </tr>
 
         <tr>

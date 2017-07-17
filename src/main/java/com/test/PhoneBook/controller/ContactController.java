@@ -1,12 +1,10 @@
 package com.test.PhoneBook.controller;
 
 import com.test.PhoneBook.model.Contact;
-import com.test.PhoneBook.model.UserInfo;
 import com.test.PhoneBook.service.ContactService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,7 +45,7 @@ public class ContactController {
         newContact.setAuthor(contact.getAuthor());
         newContact.setAddress(contact.getAddress());
         newContact.setCellPhone(contact.getCellPhone());
-        newContact.setFio(contact.getFio());
+        newContact.setPatronymic(contact.getPatronymic());
         newContact.setHomePhone(contact.getHomePhone());
 
         contactService.addContact(newContact);

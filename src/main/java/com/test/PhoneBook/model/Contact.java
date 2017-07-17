@@ -11,7 +11,10 @@ public class Contact implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    private String fio;
+    //middle name
+    private String patronymic;
+    private String firstName;
+    private String lastName;
 
     private String cellPhone;
     private String homePhone;
@@ -37,12 +40,12 @@ public class Contact implements Serializable {
         this.id = id;
     }
 
-    public String getFio() {
-        return fio;
+    public String getPatronymic() {
+        return patronymic;
     }
 
-    public void setFio(String fio) {
-        this.fio = fio;
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
     }
 
     public String getCellPhone() {
@@ -83,5 +86,21 @@ public class Contact implements Serializable {
 
     public void setAuthor(UserInfo author) {
         this.author = author;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
