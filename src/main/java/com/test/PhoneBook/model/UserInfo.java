@@ -25,7 +25,7 @@ public class UserInfo implements Serializable {
 
     private short enabled;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", cascade = CascadeType.PERSIST)
     List<Contact> contactList;
 
     public UserInfo() {

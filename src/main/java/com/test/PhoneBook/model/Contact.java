@@ -21,7 +21,7 @@ public class Contact implements Serializable {
     private String address;
     private String mail;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "userName", referencedColumnName = "id")
     private UserInfo author;
 

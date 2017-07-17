@@ -7,15 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
 @Controller
-@RequestMapping("app")
+@RequestMapping("app/contact")
 public class ContactController {
 
     private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
@@ -23,7 +21,14 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
-    @GetMapping("contact/creation")
+    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    public String contactDelete(@RequestParam(name="contactId")Long id) {
+        logger.info("contact Id to delete " + id);
+        contactService.deleteContact(id);
+        return "redirect:/app/secure/contact-details";
+    }
+
+    @GetMapping("/creation")
     public ModelAndView createUserView() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("contact-creation");
@@ -31,7 +36,7 @@ public class ContactController {
         return mav;
     }
 
-    @PostMapping("contact/creation")
+    @PostMapping("/creation")
     public ModelAndView createUser(@Valid Contact contact, BindingResult result) {
         ModelAndView mav = new ModelAndView();
         if (result.hasErrors()) {

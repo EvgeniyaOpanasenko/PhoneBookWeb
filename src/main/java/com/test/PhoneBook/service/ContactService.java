@@ -17,4 +17,6 @@ public interface ContactService {
     boolean deleteContact(Contact contact);
 
     boolean editContact(Contact contact);
+
+    void deleteContact(Long id);
 }

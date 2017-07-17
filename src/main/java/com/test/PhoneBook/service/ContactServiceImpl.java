@@ -46,4 +46,9 @@ public class ContactServiceImpl implements ContactService {
     public boolean editContact(Contact contact) {
         return false;
     }
+
+    @Override
+    public void deleteContact(Long id) {
+        contactRepository.delete(id);
+    }
 }

@@ -38,11 +38,11 @@ public class UserController {
         if (role.equals("ROLE_ADMIN")) {
             mav.addObject("userContacts", contactService.getAllContacts());
             mav.setViewName("contacts");
-            logger.info("All users collected by author ADMIN");
+            logger.info("All contacts collected by author ADMIN");
         } else {
             mav.addObject("userContacts", contactService.getAllContactsByAuthor(name));
             mav.setViewName("contacts");
-            logger.info("All users collected for USER");
+            logger.info("All contacts collected for USER");
         }
 
        /* mav.addObject("userContacts", contactService.getAllContacts());

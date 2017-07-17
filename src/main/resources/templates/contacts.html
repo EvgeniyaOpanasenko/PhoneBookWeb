@@ -32,8 +32,8 @@
         <td th:text="${contact.mail}"></td>
         <div>
             <td>
-                <a th:href="@{/delete/contact(contctId=${contact.id})}" class="btn btn-danger">Delete</a>
-                <a th:href="@{/edit/contact(contactId=${contact.id})}" class="btn btn-danger">Edit</a>
+                <a th:href="@{/app/contact/delete(contactId=${contact.id})}" class="btn btn-danger">Delete</a>
+                <a th:href="@{/app/contact/edit(contactId=${contact.id})}" class="btn btn-danger">Edit</a>
             </td>
         </div>
     </tr>
