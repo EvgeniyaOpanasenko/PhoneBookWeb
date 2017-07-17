@@ -28,7 +28,6 @@ public class ContactServiceImpl implements ContactService {
         List<Contact> contacts = getAllContacts().stream()
                 .filter(contact -> contact.getAuthor().getUserName()
                         .equals(author)).collect(Collectors.toList());
-        contacts.forEach(System.out::println);
         return contacts;
     }
 
