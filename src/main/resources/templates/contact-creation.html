@@ -5,33 +5,44 @@
 </head>
 <body>
 <header th:replace="layout :: site-header"/>
-<h1>Registration</h1>
+<h1>Contact creation</h1>
 <form action="#" th:action="@{/app/contact/creation}" th:object="${contact}" method="POST">
     <table>
+
         <tr>
-            Full Name : <input type="text" name="patronymic"/> <br/><br/>
+            First Name : <input type="text" name="firstName"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('firstName')}" th:class="'error'">Name Error</label>
+        </tr>
+
+        <tr>
+            Last Name : <input type="text" name="lastName"/> <br/><br/>
+            <label th:if="${#fields.hasErrors('lastName')}" th:class="'error'">Name Error</label>
+        </tr>
+
+        <tr>
+            Patronymic name: <input type="text" name="patronymic"/> <br/><br/>
             <label th:if="${#fields.hasErrors('patronymic')}" th:class="'error'">Name Error</label>
         </tr>
 
         <tr>
             Cell Phone : <input type="text" name="cellPhone"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('cellPhone')}" th:class="'error'">Password Error</label>
+            <label th:if="${#fields.hasErrors('cellPhone')}" th:class="'error'">Phone Error</label>
         </tr>
 
         <tr>
             Home Phone : <input type="text" name="homePhone"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('homePhone')}" th:class="'error'">Password Error</label>
+            <label th:if="${#fields.hasErrors('homePhone')}" th:class="'error'">Phone Error</label>
         </tr>
 
         <tr>
             Address : <input type="text" name="address"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('address')}" th:class="'error'">Password Error</label>
+            <label th:if="${#fields.hasErrors('address')}" th:class="'error'">Address Error</label>
         </tr>
 
 
         <tr>
             Mail : <input type="text" name="mail"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('mail')}" th:class="'error'">Password Error</label>
+            <label th:if="${#fields.hasErrors('mail')}" th:class="'error'">Mail Error</label>
         </tr>
 
         <tr>
