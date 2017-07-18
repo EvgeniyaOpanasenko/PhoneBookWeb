@@ -39,7 +39,9 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public boolean editContact(Contact contact) {
 
-        return false;
+        contactRepository.delete(contact.getId());
+        contactRepository.save(contact);
+        return true;
     }
 
     @Override
@@ -63,12 +65,19 @@ public class ContactServiceImpl implements ContactService {
 
     }
 
+    @Override
+    public Contact getContactToEdit(Long id) {
+        //TODO implement peek method
+        return getAllContacts().stream()
+                .filter(contact -> contact.getId() == id).findFirst().get();
+    }
+
 
     private String getLoggedInUserName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         //TODO need to implement org.springframework.security.core.userdetails.User
         // to get from Security Context Object of customUser
-        String userName =  auth.getName();
+        String userName = auth.getName();
         logger.info("User logged in name " + userName);
         return userName;
     }

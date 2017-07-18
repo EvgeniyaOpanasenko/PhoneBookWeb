@@ -21,7 +21,36 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
-    @RequestMapping(value = "/delete", method = RequestMethod.GET)
+    @GetMapping("/edit")
+    public ModelAndView editContactView(@RequestParam(name = "contactId") Long id) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("userContacts", contactService.getContactToEdit(id));
+        mav.setViewName("contact-edit");
+        mav.addObject("contact", new Contact());
+        return mav;
+    }
+
+    @PostMapping("/edit")
+    public String editContact(@Valid Contact contact, BindingResult result,
+                              @RequestParam(name = "contactId") Long id) {
+        logger.info("Contact to edit ID  " + contact.getId());
+       /* Contact newContact = new Contact();
+        newContact.setHomePhone(contact.getHomePhone());
+        newContact.setCellPhone(contact.getCellPhone());
+        newContact.setAddress(contact.getAddress());
+        newContact.setUser(contactService.getCurrentlyLoggedInUser());
+        newContact.setFirstName(contact.getFirstName());
+        newContact.setLastName(contact.getLastName());
+        newContact.setPatronymic(contact.getPatronymic());
+        newContact.setMail(contact.getMail());
+        //newContact.setId(contact.getId()+1);*/
+        //contactService.deleteContact(id);
+        contactService.addContact(contact);
+
+        return "redirect:/app/secure/contact-details";
+    }
+
+    @GetMapping(value = "/delete")
     public String contactDelete(@RequestParam(name = "contactId") Long id) {
         logger.info("contact Id to delete " + id);
         contactService.deleteContact(id);
@@ -38,7 +67,6 @@ public class ContactController {
 
     @PostMapping("/creation")
     public String createContact(@Valid Contact contact, BindingResult result) {
-
         Contact newContact = new Contact();
         newContact.setHomePhone(contact.getHomePhone());
         newContact.setCellPhone(contact.getCellPhone());
@@ -54,6 +82,5 @@ public class ContactController {
 
         return "redirect:/app/secure/contact-details";
     }
-
 
 }

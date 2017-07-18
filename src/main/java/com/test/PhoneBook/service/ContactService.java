@@ -20,4 +20,7 @@ public interface ContactService {
     List<Contact> getAllContactsByCurrentlyLoggedInUser();
 
     UserDto getCurrentlyLoggedInUser();
+
+    Contact getContactToEdit(Long id);
+
 }
