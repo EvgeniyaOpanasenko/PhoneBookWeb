@@ -46,6 +46,7 @@ public class ContactController {
         //newContact.setId(contact.getId()+1);*/
         //contactService.deleteContact(id);
         contactService.addContact(contact);
+        //TODO edit logic
 
         return "redirect:/app/secure/contact-details";
     }
