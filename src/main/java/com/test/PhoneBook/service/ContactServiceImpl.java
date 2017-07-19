@@ -21,6 +21,11 @@ public class ContactServiceImpl implements ContactService {
     @Autowired
     private ContactRepository contactRepository;
 
+    public ContactServiceImpl(ContactRepository contactRepository) {
+        this.contactRepository = contactRepository;
+    }
+
+    //TODO moove from here to a sepearated class Service
     @Autowired
     private UserRepository userRepository;
 
@@ -29,7 +34,6 @@ public class ContactServiceImpl implements ContactService {
 
         return (List<Contact>) contactRepository.findAll();
     }
-
 
     @Override
     public Contact addContact(Contact contact) {

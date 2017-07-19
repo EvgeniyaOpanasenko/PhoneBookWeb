@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head th:fragment="site-head">
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}"/>
@@ -11,16 +11,19 @@
 <header th:fragment="site-header" th:remove="tag">
     <header>
         <a href="index.html" th:href="@{/}">Home</a>
-        <a href="login.html" th:href="@{/app/login}">Login</a>
         <a href="user-creation.html" th:href="@{/app/create-user}">Register</a>
-        <a href="contacts.html" th:href="@{/app/secure/contact-details}">Conatcs</a>
-        <a href="contact-creation.html" th:href="@{/app/contact/creation}">Create Create</a>
-        <div id="logged-in-info">
-            <span>Hello,<b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b></span>
-            <form method="post" th:action="@{/app-logout}">
-                <input type="submit" value="Logout"/>
-            </form>
+        <a href="contacts.html" th:href="@{/app/secure/contact-details}">Contacts</a>
+        <a href="contact-creation.html" th:href="@{/app/contact/creation}">Create Contact</a>
+
+        <div sec:authorize="isAuthenticated()">
+            <div id="logged-in-info">
+                <span>Hello,<b th:inline="text"  class="user"> [[${#httpServletRequest.remoteUser}]] </b></span>
+                <form method="post" th:action="@{/app-logout}">
+                    <input type="submit" value="Logout"/>
+                </form>
+            </div>
         </div>
+
     </header>
 
     <!--<ul id="messages" th:with="notifyMessages=${session[T(blog.service

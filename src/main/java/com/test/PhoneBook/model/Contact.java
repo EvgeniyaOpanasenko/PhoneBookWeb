@@ -29,6 +29,10 @@ public class Contact implements Serializable {
     public Contact() {
     }
 
+    public Contact(String firstName) {
+        this.firstName = firstName;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
