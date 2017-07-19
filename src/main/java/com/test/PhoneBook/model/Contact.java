@@ -1,6 +1,9 @@
 package com.test.PhoneBook.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
@@ -12,14 +15,28 @@ public class Contact implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    //middle name
-    private String patronymic;
+    @Size(min = 4, max = 10)
+    @NotNull
     private String firstName;
+
+    //middle name
+    @Size(min = 4, max = 10)
+    @NotNull
+    private String patronymic;
+
+    @Size(min = 4, max = 10)
+    @NotNull
     private String lastName;
 
+    @NotNull
+    @Pattern(regexp = "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$")
     private String cellPhone;
+
     private String homePhone;
+
     private String address;
+
+    @Pattern(regexp = ".+@.+\\..+")
     private String mail;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

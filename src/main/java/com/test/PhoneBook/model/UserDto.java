@@ -1,6 +1,9 @@
 package com.test.PhoneBook.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,10 +16,20 @@ public class UserDto implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotNull
+    @Size(min = 3)
+    @Pattern(regexp = "^[a-zA-Z0-9äöüÄÖÜ]*$")
+    @Column(unique = true)
     private String userName;
+
+    @Size(min = 5)
     private String password;
+
     private String role;
+
+    @Size(min = 5)
     private String fullName;
+
     private short enabled;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
@@ -30,6 +43,15 @@ public class UserDto implements Serializable {
         this.password = "123";
         this.role = "ROLE_USER";
         this.enabled = 1;
+    }
+
+    public UserDto(String userName, String password, String role,
+                   String fullName, short enabled) {
+        this.userName = userName;
+        this.password = "123";
+        this.role = "ROLE_USER";
+        this.enabled = 1;
+        this.fullName = fullName;
     }
 
     public static long getSerialVersionUID() {

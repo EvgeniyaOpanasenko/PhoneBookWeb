@@ -1,54 +1,72 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <title>Contact add</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
 <header th:replace="layout :: site-header"/>
-<h1>Contact creation</h1>
+<h1>Create Contact</h1>
 <form action="#" th:action="@{/app/contact/creation}" th:object="${contact}" method="POST">
     <table>
-
         <tr>
-            First Name : <input type="text" name="firstName"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('firstName')}" th:class="'error'">Name Error</label>
+            <td>First Name</td>
+            <td>
+                <input type="text" th:field="*{firstName}"/>
+                <label th:if="${#fields.hasErrors('firstName')}" th:text="#{error.contact.firstName}" th:class="'error'">First name Error</label>
+            </td>
         </tr>
 
         <tr>
-            Last Name : <input type="text" name="lastName"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('lastName')}" th:class="'error'">Name Error</label>
+            <td>Patronymic Name</td>
+            <td>
+                <input type="text" th:field="*{patronymic}"/>
+                <label th:if="${#fields.hasErrors('patronymic')}" th:text="#{error.contact.patronymic}" th:class="'error'">Patronymic Name Error</label>
+            </td>
         </tr>
 
         <tr>
-            Patronymic name: <input type="text" name="patronymic"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('patronymic')}" th:class="'error'">Name Error</label>
+            <td>Last Name</td>
+            <td>
+                <input type="text" th:field="*{lastName}"/>
+                <label th:if="${#fields.hasErrors('lastName')}" th:text="#{error.contact.lastName}" th:class="'error'">Last Name Error</label>
+            </td>
         </tr>
 
         <tr>
-            Cell Phone : <input type="text" name="cellPhone"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('cellPhone')}" th:class="'error'">Phone Error</label>
+            <td>Cell phone</td>
+            <td>
+                <input type="text" th:field="*{cellPhone}"/>
+                <label th:if="${#fields.hasErrors('cellPhone')}" th:text="#{error.contact.cellPhone}" th:class="'error'">Cell phone Error</label>
+            </td>
         </tr>
 
         <tr>
-            Home Phone : <input type="text" name="homePhone"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('homePhone')}" th:class="'error'">Phone Error</label>
+            <td>Home phone</td>
+            <td>
+                <input type="text" th:field="*{homePhone}"/>
+            </td>
         </tr>
 
         <tr>
-            Address : <input type="text" name="address"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('address')}" th:class="'error'">Address Error</label>
+            <td>Mail</td>
+            <td>
+                <input type="text" th:field="*{mail}"/>
+                <label th:if="${#fields.hasErrors('mail')}" th:text="#{error.contact.mail}" th:class="'error'">Mail Error</label>
+            </td>
         </tr>
 
-
         <tr>
-            Mail : <input type="text" name="mail"/> <br/><br/>
-            <label th:if="${#fields.hasErrors('mail')}" th:class="'error'">Mail Error</label>
+            <td>Address</td>
+            <td>
+                <input type="text" th:field="*{address}"/>
+            </td>
         </tr>
 
         <tr>
             <td colspan="2">
-                <input type="submit" name="Submit"/>
-                <input type="reset" name="Reset"/>
+                <input type="submit" th:value="#{user.form.submit}"/>
+                <input type="reset" th:value="#{user.form.reset}"/>
             </td>
         </tr>
     </table>

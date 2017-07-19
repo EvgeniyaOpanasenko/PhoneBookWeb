@@ -9,9 +9,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.validation.Valid;
 
 @Controller
@@ -32,7 +34,7 @@ public class RegistrationUserController {
     }
 
     @PostMapping("create-user")
-    public ModelAndView createUser(@Valid UserDto user, BindingResult result) {
+    public ModelAndView createUser(@Valid @ModelAttribute("user") UserDto user, BindingResult result) {
         ModelAndView mav = new ModelAndView();
         if (result.hasErrors()) {
             logger.info("Validation errors while submitting form");

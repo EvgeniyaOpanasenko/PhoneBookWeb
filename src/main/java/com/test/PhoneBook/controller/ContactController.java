@@ -66,7 +66,14 @@ public class ContactController {
     }
 
     @PostMapping("/creation")
-    public String createContact(@Valid Contact contact, BindingResult result) {
+    public ModelAndView createContact(@Valid @ModelAttribute("contact") Contact contact, BindingResult result) {
+        ModelAndView mav = new ModelAndView();
+        if (result.hasErrors()) {
+            logger.info("Validation errors while submitting form");
+            mav.setViewName("contact-creation");
+            mav.addObject("contact", contact);
+            return mav;
+        }
         Contact newContact = new Contact();
         newContact.setHomePhone(contact.getHomePhone());
         newContact.setCellPhone(contact.getCellPhone());
@@ -80,7 +87,9 @@ public class ContactController {
 
         logger.info("Contact created successfully");
 
-        return "redirect:/app/secure/contact-details";
+        ModelAndView modelAndView = new ModelAndView("redirect:/app/secure/contact-details");
+
+        return modelAndView;
     }
 
 }
