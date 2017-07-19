@@ -35,6 +35,8 @@ public class LoginControllerTest {
     public void tearDown() throws Exception {
     }
 
+    //Spring security coordinates login process
+    //lusername/password check a nd redirects to /app/secure/contact-details
     @Test
     public void login() throws Exception {
         this.mockMvc.perform(get("/app/login")).andExpect(status().isOk());
