@@ -52,7 +52,7 @@ public class ContactController {
     }
 
     @GetMapping(value = "/delete")
-    public String contactDelete(@RequestParam(name = "contactId") Long id) {
+    public String deleteContact(@RequestParam(name = "contactId") Long id) {
         logger.info("contact Id to delete " + id);
         contactService.deleteContact(id);
         return "redirect:/app/secure/contact-details";
