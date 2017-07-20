@@ -61,7 +61,7 @@ public class ContactServiceImplTest {
 
     @Test
     public void addContact() throws Exception {
-        given(contactService.addContact(new Contact("Foo"))).willReturn(new Contact("Foo"));
+        //given(contactService.addContact(new Contact("Foo"))).willReturn(new Contact("Foo"));
         /*mockMvc.perform(post("/app/contact/creation")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsBytes(new CreateClientRequest("Foo"))))

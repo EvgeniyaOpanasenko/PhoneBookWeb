@@ -1,0 +1,52 @@
+package com.test.PhoneBook.dao;
+
+import com.test.PhoneBook.model.UserDto;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.test.context.junit4.SpringRunner;
+
+import static org.assertj.core.api.Java6Assertions.assertThat;
+import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
+
+
+@RunWith(SpringRunner.class)
+@DataJpaTest
+// to use SQL dataBase for testing purpose
+@AutoConfigureTestDatabase(replace = NONE)
+public class UserRepositoryTest {
+
+    @Autowired
+    private TestEntityManager testEntityManager;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Before
+    public void setUp() throws Exception {
+        //TODO set up before refactor
+    }
+
+
+    @Test
+    public void whenFindByUserName_thenReturnUser() throws Exception {
+        //given
+        UserDto inDataBase = new UserDto("kira");
+        testEntityManager.persist(inDataBase);
+        testEntityManager.flush();
+
+        //when
+        UserDto found = userRepository
+                .findByUserName(inDataBase.getUserName());
+
+        // then
+        assertThat(found.getUserName())
+                .isEqualTo(inDataBase.getUserName());
+
+    }
+
+}

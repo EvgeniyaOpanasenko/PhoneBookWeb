@@ -54,6 +54,10 @@ public class UserDto implements Serializable {
         this.fullName = fullName;
     }
 
+    public UserDto(String userName) {
+        this.userName = userName;
+    }
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }

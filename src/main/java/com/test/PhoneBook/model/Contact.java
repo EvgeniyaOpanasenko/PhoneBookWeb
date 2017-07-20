@@ -46,8 +46,28 @@ public class Contact implements Serializable {
     public Contact() {
     }
 
-    public Contact(String firstName) {
+    public Contact(String firstName, String patronymic, String lastName) {
         this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.lastName = lastName;
+    }
+
+    public Contact(String firstName,
+                   String patronymic,
+                   String lastName,
+                   String cellPhone,
+                   String homePhone,
+                   String address,
+                   String mail,
+                   UserDto user) {
+        this.firstName = firstName;
+        this.patronymic = patronymic;
+        this.lastName = lastName;
+        this.cellPhone = cellPhone;
+        this.homePhone = homePhone;
+        this.address = address;
+        this.mail = mail;
+        this.user = user;
     }
 
     public static long getSerialVersionUID() {
