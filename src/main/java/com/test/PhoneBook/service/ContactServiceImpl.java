@@ -2,6 +2,7 @@ package com.test.PhoneBook.service;
 
 import com.test.PhoneBook.dao.ContactRepository;
 import com.test.PhoneBook.dao.UserRepository;
+import com.test.PhoneBook.exceptions.SuchContactsExistAllredyException;
 import com.test.PhoneBook.model.Contact;
 import com.test.PhoneBook.model.UserDto;
 import org.slf4j.Logger;
@@ -28,7 +29,8 @@ public class ContactServiceImpl implements ContactService {
     public ContactServiceImpl() {
     }
 
-    //TODO moove from here to a sepearated class Service
+    //TODO move from here to a separated class Service
+
     @Autowired
     private UserRepository userRepository;
 
@@ -39,16 +41,14 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact addContact(Contact contact) {
+    public Contact addContact(Contact contact) throws SuchContactsExistAllredyException {
+        if (getAllContacts().stream()
+                .filter(contact1 -> contact1.getFirstName()
+                        .equals(contact.getFirstName())).findFirst().isPresent()) {
+            throw new SuchContactsExistAllredyException("Pick other name");
+        }
+        contact.setUser(getCurrentlyLoggedInUser());
         return contactRepository.save(contact);
-    }
-
-    @Override
-    public boolean editContact(Contact contact) {
-
-        contactRepository.delete(contact.getId());
-        contactRepository.save(contact);
-        return true;
     }
 
     @Override
@@ -62,23 +62,17 @@ public class ContactServiceImpl implements ContactService {
         return getAllContacts().stream()
                 .filter(contact -> contact.getUser()
                         .getUserName().equals(name)).collect(Collectors.toList());
-
     }
 
-    @Override
     public UserDto getCurrentlyLoggedInUser() {
         String name = getLoggedInUserName();
         return userRepository.findByUserName(name);
-
     }
 
     @Override
-    public Contact getContactToEdit(Long id) {
-        //TODO implement peek method
-        return getAllContacts().stream()
-                .filter(contact -> contact.getId() == id).findFirst().get();
+    public Contact findOne(long id) {
+        return contactRepository.findOne(id);
     }
-
 
     private String getLoggedInUserName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

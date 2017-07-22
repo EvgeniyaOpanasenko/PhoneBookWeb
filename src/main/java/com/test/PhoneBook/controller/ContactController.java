@@ -2,6 +2,7 @@ package com.test.PhoneBook.controller;
 
 import com.test.PhoneBook.model.Contact;
 import com.test.PhoneBook.service.ContactService;
+import com.test.PhoneBook.exceptions.SuchContactsExistAllredyException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,34 +22,36 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
-    @GetMapping("/edit")
-    public ModelAndView editContactView(@RequestParam(name = "contactId") Long id) {
+   /* @GetMapping("/edit")
+    public ModelAndView editContactView(@Valid @RequestParam(name = "contactId") String id) {
         ModelAndView mav = new ModelAndView();
-        mav.addObject("userContacts", contactService.getContactToEdit(id));
+        mav.addObject("userContacts", contactService.findOne(Long.parseLong(id)));
         mav.setViewName("contact-edit");
         mav.addObject("contact", new Contact());
         return mav;
-    }
+    }*/
 
     @PostMapping("/edit")
-    public String editContact(@Valid Contact contact, BindingResult result,
-                              @RequestParam(name = "contactId") Long id) {
-        logger.info("Contact to edit ID  " + contact.getId());
-       /* Contact newContact = new Contact();
-        newContact.setHomePhone(contact.getHomePhone());
-        newContact.setCellPhone(contact.getCellPhone());
-        newContact.setAddress(contact.getAddress());
-        newContact.setUser(contactService.getCurrentlyLoggedInUser());
-        newContact.setFirstName(contact.getFirstName());
-        newContact.setLastName(contact.getLastName());
-        newContact.setPatronymic(contact.getPatronymic());
-        newContact.setMail(contact.getMail());
-        //newContact.setId(contact.getId()+1);*/
-        //contactService.deleteContact(id);
-        contactService.addContact(contact);
-        //TODO edit logic
+    public ModelAndView editContact(@Valid @ModelAttribute("contact") Contact contact, BindingResult result) throws SuchContactsExistAllredyException {
+        ModelAndView mav = new ModelAndView();
+        if (result.hasErrors()) {
+            logger.info("Validation errors while submitting form");
+            //mav.setViewName("contact-edit");
+            //mav.addObject("userContacts", contactService.findOne(contact.getId()));
+            //mav.addObject("contact", contact);
+            //mav.setViewName("redirect:/app/contact/edit");
+            ModelAndView modelAndView = new ModelAndView("redirect:/app/secure/contact-details");
+            return modelAndView;
+        }
 
-        return "redirect:/app/secure/contact-details";
+        //contact.setId(Long.parseLong(id));
+        contactService.addContact(contact);
+
+        logger.info("Contact created successfully");
+
+        ModelAndView modelAndView = new ModelAndView("redirect:/app/secure/contact-details");
+
+        return modelAndView;
     }
 
     @GetMapping(value = "/delete")
@@ -67,7 +70,8 @@ public class ContactController {
     }
 
     @PostMapping("/creation")
-    public ModelAndView createContact(@Valid @ModelAttribute("contact") Contact contact, BindingResult result) {
+    public ModelAndView createContact(@Valid @ModelAttribute("contact") Contact contact, BindingResult result)
+            throws SuchContactsExistAllredyException {
         ModelAndView mav = new ModelAndView();
         if (result.hasErrors()) {
             logger.info("Validation errors while submitting form");
@@ -75,16 +79,8 @@ public class ContactController {
             mav.addObject("contact", contact);
             return mav;
         }
-        Contact newContact = new Contact();
-        newContact.setHomePhone(contact.getHomePhone());
-        newContact.setCellPhone(contact.getCellPhone());
-        newContact.setAddress(contact.getAddress());
-        newContact.setUser(contactService.getCurrentlyLoggedInUser());
-        newContact.setFirstName(contact.getFirstName());
-        newContact.setLastName(contact.getLastName());
-        newContact.setPatronymic(contact.getPatronymic());
-        newContact.setMail(contact.getMail());
-        contactService.addContact(newContact);
+
+        contactService.addContact(contact);
 
         logger.info("Contact created successfully");
 

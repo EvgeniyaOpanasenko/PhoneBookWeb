@@ -13,7 +13,8 @@
             <td>First Name</td>
             <td>
                 <input type="text" th:field="*{firstName}"/>
-                <label th:if="${#fields.hasErrors('firstName')}" th:text="#{error.contact.firstName}" th:class="'error'">First name Error</label>
+                <label th:if="${#fields.hasErrors('firstName')}"
+                       th:text="#{error.contact.firstName}" th:class="'error'">First name Error</label>
             </td>
         </tr>
 
@@ -21,7 +22,8 @@
             <td>Patronymic Name</td>
             <td>
                 <input type="text" th:field="*{patronymic}"/>
-                <label th:if="${#fields.hasErrors('patronymic')}" th:text="#{error.contact.patronymic}" th:class="'error'">Patronymic Name Error</label>
+                <label th:if="${#fields.hasErrors('patronymic')}"
+                       th:text="#{error.contact.patronymic}" th:class="'error'">Patronymic Name Error</label>
             </td>
         </tr>
 

@@ -1,40 +1,88 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Phone book</title>
-    <link rel="stylesheet" href="/css/styles.css"/>
+    <title>Contact add</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
 </head>
 <body>
 <header th:replace="layout :: site-header"/>
-<h3>User Contacts Details</h3>
-<br/>
-<form th:action="@{/app/contact/edit}" method="post">
+<h1>Create Contact</h1>
+<form action="#" th:action="@{/app/contact/edit(contactId=${contact.id})}" th:object="${contact}" method="POST">
     <table>
+        <tr th:each="contact : ${userContacts}">
         <tr>
-            <th>Id</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Patronymic Name</th>
-            <th>Cell Phone</th>
-            <th>Home Phone</th>
-            <th>Address</th>
-            <th>Mail</th>
-            <th>Options</th>
+            <td>Id</td>
+            <td th:text="${contact.id}" contenteditable="false"></td>
+        <!--<input type="number" th:field="*{contactId}"/>-->
         </tr>
-        <tr th:each="contact : ${userContacts}" contenteditable="true">
-            <td th:text="${contact.id}"></td>
-            <td th:text="${contact.firstName}"></td>
-            <td th:text="${contact.LastName}"></td>
-            <td th:text="${contact.patronymic}"></td>
-            <td th:text="${contact.cellPhone}"></td>
-            <td th:text="${contact.homePhone}"></td>
-            <td th:text="${contact.address}"></td>
-            <td th:text="${contact.mail}"></td>
-        </tr>
-    </table>
-    <a th:href="@{/app/contact/edit(contactId=${contact.id})}" class="btn btn-danger">Create Contact</a>
-</form>
 
+        <tr>
+            <td>First Name</td>
+            <td th:text="${contact.firstName}" contenteditable="true">
+                <input type="text" th:field="*{firstName}"/>
+                <label th:if="${#fields.hasErrors('firstName')}"
+                       th:text="#{error.contact.firstName}" th:class="'error'">First name Error</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Patronymic Name</td>
+            <td th:text="${contact.patronymic}" contenteditable="true">
+                <input type="text" th:field="*{patronymic}"/>
+                <label th:if="${#fields.hasErrors('patronymic')}" th:text="#{error.contact.patronymic}"
+                       th:class="'error'">Patronymic Name Error</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Last Name</td>
+            <td th:text="${contact.lastName}" contenteditable="true">
+                <input type="text" th:field="*{lastName}"/>
+                <label th:if="${#fields.hasErrors('lastName')}" th:text="#{error.contact.lastName}" th:class="'error'">Last
+                    Name Error</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Cell phone</td>
+            <td th:text="${contact.cellPhone}" contenteditable="true">
+                <input type="text" th:field="*{cellPhone}"/>
+                <label th:if="${#fields.hasErrors('cellPhone')}" th:text="#{error.contact.cellPhone}"
+                       th:class="'error'">Cell phone Error</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Home phone</td>
+            <td th:text="${contact.homePhone}" contenteditable="true">
+                <input type="text" th:field="*{homePhone}"/>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Mail</td>
+            <td th:text="${contact.mail}" contenteditable="true">
+                <input type="text" th:field="*{mail}"/>
+                <label th:if="${#fields.hasErrors('mail')}" th:text="#{error.contact.mail}" th:class="'error'">Mail
+                    Error</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td>Address</td>
+            <td th:text="${contact.address}" contenteditable="true">
+                <input type="text" th:field="*{address}"/>
+            </td>
+        </tr>
+
+        <td colspan="2">
+            <input type="submit" th:value="Submit" th:action="@{/app/contact/edit(contactId=${contact.id})}"/>
+
+        </td>
+        </tr>
+
+    </table>
+</form>
 <footer th:replace="layout :: site-footer"/>
 </body>
 </html>

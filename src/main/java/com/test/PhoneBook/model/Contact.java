@@ -52,14 +52,8 @@ public class Contact implements Serializable {
         this.lastName = lastName;
     }
 
-    public Contact(String firstName,
-                   String patronymic,
-                   String lastName,
-                   String cellPhone,
-                   String homePhone,
-                   String address,
-                   String mail,
-                   UserDto user) {
+    public Contact(String firstName, String patronymic, String lastName, String cellPhone,
+                   String homePhone, String address, String mail, UserDto user) {
         this.firstName = firstName;
         this.patronymic = patronymic;
         this.lastName = lastName;

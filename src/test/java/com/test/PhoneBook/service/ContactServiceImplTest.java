@@ -1,6 +1,7 @@
 package com.test.PhoneBook.service;
 
 import com.test.PhoneBook.dao.ContactRepository;
+import com.test.PhoneBook.exceptions.SuchContactsExistAllredyException;
 import com.test.PhoneBook.model.Contact;
 import com.test.PhoneBook.model.UserDto;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class ContactServiceImplTest {
     }
 
     @Test
-    public void addContact() throws Exception {
+    public void addContact() throws Exception, SuchContactsExistAllredyException {
         // Expected objects to save
         contact = new Contact(
                 "vera", "ivanovna",
