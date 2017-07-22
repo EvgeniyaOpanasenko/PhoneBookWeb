@@ -1,66 +1,73 @@
 package com.test.PhoneBook.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.test.PhoneBook.dao.ContactRepository;
 import com.test.PhoneBook.model.Contact;
-import org.junit.After;
-import org.junit.Before;
+import com.test.PhoneBook.model.UserDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static junit.framework.TestCase.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@RunWith(MockitoJUnitRunner.class)
 public class ContactServiceImplTest {
 
-    //@Autowired
-    //ContactRepository contactRepository;
+    private Contact contact;
 
-    /*private ContactService createContactService;
-    private ContactRepository contactRepositoryMock;
+    @Mock
+    private static ContactRepository contactRepository;
 
-
-    @Before
-    public void setUp() throws Exception {
-        contactRepositoryMock = Mockito.mock(ContactRepository.class);
-        createContactService = new ContactServiceImpl(contactRepositoryMock) ;
-
-    }*/
-
-    //TODO create mock array of users and contacts
-    //@Autowired
-    //MockMvc mockMvc;
-
-    @MockBean
-    ContactService contactService;
-
-    @Autowired
-    ObjectMapper objectMapper;
-
-    @After
-    public void tearDown() throws Exception {
-    }
+    @InjectMocks
+    private static ContactService contactService = new ContactServiceImpl();
 
     @Test
     public void getAllContacts() throws Exception {
-        //createContactService.getAllContacts();
-        //assertArrayEquals((new ArrayList<Contact>), createContactService.getAllContacts());
+        Contact contact1 = new Contact(
+                "vera", "ivanovna",
+                "egorina", "(123) 456-7890",
+                "(123) 456-7890", "kiev",
+                "kira@mail.ru", new UserDto("author"));
+        contactRepository.save(contact1);
+        List<Contact> expected = new ArrayList<>();
+        expected.add(contact1);
+        when(contactRepository.findAll()).thenReturn(expected);
+
+        List<Contact> retrivedContact = contactService.getAllContacts();
+        assertEquals("Found", expected, retrivedContact);
+
     }
 
     @Test
     public void addContact() throws Exception {
+        // Expected objects to save
+        contact = new Contact(
+                "vera", "ivanovna",
+                "egorina", "(123) 456-7890",
+                "(123) 456-7890", "kiev",
+                "kira@mail.ru", new UserDto("author"));
+
+
+        Contact expected = new Contact(
+                "vera", "ivanovna",
+                "egorina", "(123) 456-7890",
+                "(123) 456-7890", "kiev",
+                "kira@mail.ru", new UserDto("author"));
+
+        // Mockito expectations
+        when(contactRepository.save(contact)).thenReturn(expected);
+
+        // Execute the method being tested
+        Contact newContact = contactService.addContact(contact);
+
+        //make sure method works
+        verify(contactRepository).save(contact);
         //given(contactService.addContact(new Contact("Foo"))).willReturn(new Contact("Foo"));
         /*mockMvc.perform(post("/app/contact/creation")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -72,10 +79,36 @@ public class ContactServiceImplTest {
 
     @Test
     public void editContact() throws Exception {
+
     }
 
     @Test
     public void deleteContact() throws Exception {
+        // Expected objects to save
+        contact = new Contact(
+                "vera", "ivanovna",
+                "egorina", "(123) 456-7890",
+                "(123) 456-7890", "kiev",
+                "kira@mail.ru", new UserDto("author"));
+
+
+        Contact expected = new Contact(
+                "vera", "ivanovna",
+                "egorina", "(123) 456-7890",
+                "(123) 456-7890", "kiev",
+                "kira@mail.ru", new UserDto("author"));
+
+        // Mockito expectations
+        //when(contactRepository.delete(contact.getId())).thenReturn(expected);
+
+
+        //when(contactService.deleteContact(contact.getId())).thenReturn(expected);
+        // Execute the method being tested
+        contactService.deleteContact(contact.getId());
+
+        //make sure method works
+        verify(contactRepository).delete(contact.getId());
+
     }
 
     @Test

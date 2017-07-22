@@ -25,6 +25,9 @@ public class ContactServiceImpl implements ContactService {
         this.contactRepository = contactRepository;
     }
 
+    public ContactServiceImpl() {
+    }
+
     //TODO moove from here to a sepearated class Service
     @Autowired
     private UserRepository userRepository;
