@@ -21,8 +21,6 @@ import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTest
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
-// to use SQL dataBase for testing purpose UNCOMENT AND COMMENT @AutoConfigureTestDatabase, @ActiveProfiles
-//@AutoConfigureTestDatabase(replace = NONE)
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 @ActiveProfiles("test")
 public class ContactRepositoryTest {

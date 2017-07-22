@@ -40,7 +40,7 @@ public class UserDto implements Serializable {
 
     public UserDto(String userName, String password, String role, short enabled) {
         this.userName = userName;
-        this.password = "123";
+        this.password = password;
         this.role = "ROLE_USER";
         this.enabled = 1;
     }
@@ -48,7 +48,7 @@ public class UserDto implements Serializable {
     public UserDto(String userName, String password, String role,
                    String fullName, short enabled) {
         this.userName = userName;
-        this.password = "123";
+        this.password = password;
         this.role = "ROLE_USER";
         this.enabled = 1;
         this.fullName = fullName;
