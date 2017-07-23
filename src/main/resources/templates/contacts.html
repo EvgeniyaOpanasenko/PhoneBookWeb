@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:text-decoration="http://www.w3.org/1999/xhtml" xmlns:color="http://www.w3.org/1999/xhtml">
 <head>
     <title>Phone book</title>
     <link rel="stylesheet" href="/css/styles.css"/>
@@ -12,13 +13,13 @@
 <table>
     <tr>
         <th>Id</th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" class="btn btn-danger">First Name</a></th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byLastName}" class="btn btn-danger">Last Name</a></th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byPatronymicName}" class="btn btn-danger">Patronymic Name</a></th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" class="btn btn-danger">Cell Phone</a></th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" class="btn btn-danger">Home Phone</a></th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" class="btn btn-danger">Address</a></th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" class="btn btn-danger">Mail</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" text-decoration:="none" style="color: black">First Name</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byLastName}" text-decoration:="none" style="color: black">Last Name</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byPatronymicName}" text-decoration:="none" style="color: black">Patronymic Name</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byCellPhone}" text-decoration:="none" style="color: black">Cell Phone</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byHomePhone}" text-decoration:="none" style="color: black">Home Phone</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byAddress}" text-decoration:="none" style="color: black">Address</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byMail}" text-decoration:="none" style="color: black">Mail</a></th>
         <th>Options</th>
     </tr>
     <tr th:each="contact : ${userContacts}">
@@ -32,8 +33,8 @@
         <td th:text="${contact.mail}"></td>
         <div>
             <td>
-                <a th:href="@{/app/contact/delete(contactId=${contact.id})}" class="btn btn-danger">Delete</a>
-                <a th:href="@{/app/contact/edit(contactId=${contact.id})}" class="btn btn-danger">Edit</a>
+                <a th:href="@{/app/contact/delete(contactId=${contact.id})}" class="link_button2">Delete</a>
+                <a th:href="@{/app/contact/edit(contactId=${contact.id})}" class="link_button2">Edit</a>
             </td>
         </div>
     </tr>

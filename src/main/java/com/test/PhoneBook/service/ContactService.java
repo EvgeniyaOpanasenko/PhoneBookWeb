@@ -20,4 +20,10 @@ public interface ContactService {
     Contact findOne(long id);
 
     List<Contact> sortByFirstName();
+
+    List<Contact> sortByLastName();
+
+    List<Contact> sortBybyPatronymicName();
+
+    List<Contact> sortByCellPhone();
 }

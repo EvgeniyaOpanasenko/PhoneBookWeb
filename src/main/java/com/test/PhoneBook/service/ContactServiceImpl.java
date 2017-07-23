@@ -1,6 +1,5 @@
 package com.test.PhoneBook.service;
 
-import com.mysql.fabric.xmlrpc.base.Data;
 import com.test.PhoneBook.dao.ContactRepository;
 import com.test.PhoneBook.dao.UserRepository;
 import com.test.PhoneBook.exceptions.SuchContactsExistAllredyException;
@@ -45,8 +44,8 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public boolean addContact(Contact contact) throws SuchContactsExistAllredyException {
         if (getAllContacts().stream()
-                .filter(contact1 -> contact1.getFirstName()
-                        .equals(contact.getFirstName())).findFirst().isPresent()) {
+                .anyMatch(contact1 -> contact1.getFirstName()
+                        .equals(contact.getFirstName()))) {
             throw new SuchContactsExistAllredyException("Pick other name");
         }
         contact.setUser(getCurrentlyLoggedInUser());
@@ -56,6 +55,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public void deleteContact(Long id) {
+
         contactRepository.delete(id);
     }
 
@@ -74,16 +74,49 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact findOne(long id) {
+
         return contactRepository.findOne(id);
     }
 
     @Override
     public List<Contact> sortByFirstName() {
-        Sort sort = new Sort(Sort.Direction.ASC, "firstName");
-        List<Contact> contacts = (List<Contact>) contactRepository.findAll(sort);
-        return (List<Contact>) contactRepository.findAll(sort);
+        //TODO separate methods
+        String sortColumn = "firstName";
+        Sort sort = new Sort(Sort.Direction.ASC, sortColumn);
+        List<Contact> sorted = (List<Contact>) contactRepository.findAll(sort);
+
+        return getContactsByLoggedUserNameSorted(sorted);
     }
 
+    //TODO think of refactor: switch to change properties of sorting/ combined in one method
+    @Override
+    public List<Contact> sortByLastName() {
+        Sort sort = new Sort(Sort.Direction.ASC, "lastName");
+        List<Contact> sorted = (List<Contact>) contactRepository.findAll(sort);
+
+        return getContactsByLoggedUserNameSorted(sorted);
+    }
+
+    @Override
+    public List<Contact> sortBybyPatronymicName() {
+        Sort sort = new Sort(Sort.Direction.ASC, "patronymic");
+        List<Contact> sorted = (List<Contact>) contactRepository.findAll(sort);
+
+        return getContactsByLoggedUserNameSorted(sorted);
+    }
+
+    @Override
+    public List<Contact> sortByCellPhone() {
+        Sort sort = new Sort(Sort.Direction.DESC, "cellPhone");
+        List<Contact> sorted = (List<Contact>) contactRepository.findAll(sort);
+
+        return getContactsByLoggedUserNameSorted(sorted);
+    }
+
+    private List<Contact> getContactsByLoggedUserNameSorted(List<Contact> sorted) {
+        return sorted.stream().filter(contact -> contact.getUser()
+                .getUserName().equals(getLoggedInUserName())).collect(Collectors.toList());
+    }
 
     private String getLoggedInUserName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
