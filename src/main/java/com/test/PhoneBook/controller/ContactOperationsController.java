@@ -1,8 +1,8 @@
 package com.test.PhoneBook.controller;
 
+import com.test.PhoneBook.exceptions.SuchContactsExistAllredyException;
 import com.test.PhoneBook.model.Contact;
 import com.test.PhoneBook.service.ContactService;
-import com.test.PhoneBook.exceptions.SuchContactsExistAllredyException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +15,9 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("app/contact")
-public class ContactController {
+public class ContactOperationsController {
 
-    private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
+    private static final Logger logger = LoggerFactory.getLogger(ContactOperationsController.class);
 
     @Autowired
     private ContactService contactService;
@@ -35,7 +35,6 @@ public class ContactController {
 
         return mav;
     }
-
 
     @PostMapping(value = "/edit")
     public ModelAndView editContact(@RequestParam(name = "contactId") Long id,
@@ -55,28 +54,9 @@ public class ContactController {
 
         logger.info("Id to edit Post method " + id);
 
-        Contact editableContact = contactService.findOne(id);
+        //TODO if filed is empty = compare contact with the same in database(by id)
 
-        //Contact update = contactService.compareContatcs(editableContact, contact);
-
-        //TODO if filed di empty = compare contact with the same in database(by id)
-       /* if (contact.getFirstName().isEmpty()) {
-            contact.setFirstName(editableContact.getFirstName());
-        } else if (contact.getPatronymic().isEmpty()) {
-            contact.setPatronymic(editableContact.getPatronymic());
-        } else if (contact.getLastName().isEmpty()) {
-            contact.setLastName(editableContact.getLastName());
-        } else if (contact.getMail().isEmpty()) {
-            contact.setMail(editableContact.getMail());
-        } else if (contact.getCellPhone().isEmpty()) {
-            contact.setCellPhone(editableContact.getCellPhone());
-        } else if (contact.getHomePhone().isEmpty()) {
-            contact.setHomePhone(editableContact.getHomePhone());
-        } else if (contact.getAddress().isEmpty()) {
-            contact.setAddress(editableContact.getAddress());
-        }*/
-
-       //TODO as an option to set id to editableContact.id
+        //TODO as an option to set id to editableContact.id
         if (contactService.addContact(contact)) {
             contactService.deleteContact(id);
         }
@@ -105,7 +85,8 @@ public class ContactController {
     }
 
     @PostMapping("/creation")
-    public ModelAndView createContact(@Valid @ModelAttribute("contact") Contact contact, BindingResult result)
+    public ModelAndView createContact(@Valid @ModelAttribute("contact")
+                                              Contact contact, BindingResult result)
             throws SuchContactsExistAllredyException {
         ModelAndView mav = new ModelAndView();
         if (result.hasErrors()) {

@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebAppConfiguration
 @ContextConfiguration(classes = PhoneBookApplication.class)
-public class ContactControllerTest {
+public class ContactOperationsControllerTest {
 
     private MockMvc mockMvc;
 

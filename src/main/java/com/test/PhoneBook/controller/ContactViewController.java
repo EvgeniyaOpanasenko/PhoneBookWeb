@@ -1,6 +1,5 @@
 package com.test.PhoneBook.controller;
 
-import com.test.PhoneBook.model.Contact;
 import com.test.PhoneBook.service.ContactService;
 import com.test.PhoneBook.service.UserService;
 import org.slf4j.Logger;
@@ -11,12 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
-
 @Controller
 @RequestMapping("app")
-public class UserController {
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+public class ContactViewController {
+    private static final Logger logger = LoggerFactory.getLogger(ContactViewController.class);
 
     @Autowired
     private UserService userService;
