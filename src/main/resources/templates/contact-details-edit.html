@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Phone book</title>
+    <link rel="stylesheet" href="/css/styles.css"/>
+</head>
+<body>
+<header th:replace="layout :: site-header"/>
+<h3>User Contacts Details</h3>
+<br/>
+<form action="#" th:action="@{/app/contact/edit(contactId=${contact.id})}" th:object="${contact}" method="POST">
+<table>
+    <tr>
+        <th>Id</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Patronymic Name</th>
+        <th>Cell Phone</th>
+        <th>Home Phone</th>
+        <th>Address</th>
+        <th>Mail</th>
+        <th>Options</th>
+    </tr>
+    <tr th:each="contact : ${userContacts}" contenteditable="true">
+        <td th:text="${contact.id}" contenteditable="false" th:field="*{contactId}"></td>
+        <td>
+            <input type="text" th:field="*{firstName}" th:text="${contact.firstName}"/>
+            <label th:if="${#fields.hasErrors('firstName')}"
+                   th:text="#{error.contact.firstName}" th:class="'error'">First name Error</label>
+        </td>
+        <td>
+            <input type="text" th:field="*{lastName}" th:text="${contact.lastName}"/>
+            <label th:if="${#fields.hasErrors('lastName')}"
+                   th:text="#{error.contact.lastName}" th:class="'error'">Last Name Error</label>
+        </td>
+        <td>
+            <input type="text" th:field="*{patronymic}" th:text="${contact.patronymic}"/>
+            <label th:if="${#fields.hasErrors('patronymic')}"
+                   th:text="#{error.contact.patronymic}" th:class="'error'">Patronymic Name Error</label>
+        </td>
+        <td>
+            <input type="text" th:field="*{cellPhone}" th:text="${contact.cellPhone}"/>
+            <label th:if="${#fields.hasErrors('cellPhone')}"
+                   th:text="#{error.contact.cellPhone}" th:class="'error'">Cell phone Error</label>
+        </td>
+        <td>
+            <input type="text" th:field="*{homePhone}" th:text="${contact.homePhone}"/>
+        </td>
+        <td>
+            <input type="text" th:field="*{address}" th:text="${contact.address}"/>
+        </td>
+        <td>
+            <input type="text" th:field="*{mail}" th:text="${contact.mail}"/>
+            <label th:if="${#fields.hasErrors('mail')}"
+                   th:text="#{error.contact.mail}" th:class="'error'">Mail Error</label>
+        </td>
+        <div>
+            <td>
+                <input type="submit" th:value="Save"/>
+               <!-- <a th:href="@{/app/contact/edit(contactId=${contact.id})}" class="btn btn-danger">Save</a>-->
+            </td>
+        </div>
+    </tr>
+</table>
+</form>
+<a th:href="@{/app/secure/contact-details}" class="btn btn-danger">Cancel</a>
+<footer th:replace="layout :: site-footer"/>
+</body>
+</html>

@@ -15,23 +15,34 @@ import javax.validation.Valid;
 
 @Controller
 @RequestMapping("app/contact")
+//@SessionAttributes("contact")
 public class ContactController {
 
     private static final Logger logger = LoggerFactory.getLogger(ContactController.class);
 
     @Autowired
     private ContactService contactService;
+    private Contact contactToEdit;
 
-   /* @GetMapping("/edit")
-    public ModelAndView editContactView(@Valid @RequestParam(name = "contactId") String id) {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("userContacts", contactService.findOne(Long.parseLong(id)));
-        mav.setViewName("contact-edit");
-        mav.addObject("contact", new Contact());
-        return mav;
+    /*@ModelAttribute("contact")
+    public Contact initContact(@RequestParam("contactId") Long id) {
+        return this.contactService.findOne(id);
     }*/
 
-    @PostMapping("/edit")
+    @GetMapping("/edit")
+    public ModelAndView editContactView(@Valid @RequestParam(name = "contactId") Long id) {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("userContacts", contactService.findOne(id));
+        mav.setViewName("contact-details-edit");
+        mav.addObject("contact", new Contact());
+        mav.addObject("contactId", id);
+        logger.info("Id to edit editViewPoint getMethod " + id);
+        contactToEdit = contactService.findOne(id);
+
+        return mav;
+    }
+
+   /* @PostMapping("/edit")
     public ModelAndView editContact(@Valid @ModelAttribute("contact") Contact contact, BindingResult result) throws SuchContactsExistAllredyException {
         ModelAndView mav = new ModelAndView();
         if (result.hasErrors()) {
@@ -48,6 +59,43 @@ public class ContactController {
         contactService.addContact(contact);
 
         logger.info("Contact created successfully");
+
+        ModelAndView modelAndView = new ModelAndView("redirect:/app/secure/contact-details");
+
+        return modelAndView;
+    }*/
+
+    /*@GetMapping("/edit")
+    public String editContactView(@Valid @RequestParam(name = "contactId") String id) {
+        return "redirect:/app/secure/contact-details-edit";
+    }*/
+
+    @PostMapping(value = "/edit")
+    public ModelAndView editContact(@Valid @ModelAttribute("contact") Contact contact, BindingResult result,
+                              @RequestParam(name = "contactId") String id)
+            throws SuchContactsExistAllredyException {
+        //logger.info("contact Id to edit " + id);
+        //TODO add contact id
+        //contactService.deleteContact();
+        //contactService.deleteContact(id);
+
+        //logger.info("Contact to edit id " + id);
+        //Contact editableContact = contactService.findOne(Long.parseLong(id));
+
+        ModelAndView mav = new ModelAndView();
+        if (result.hasErrors()) {
+            logger.info("Validation errors while submitting form");
+            //mav.addObject("userContacts", contactService.findOne(Long.parseLong(id)));
+            mav.setViewName("contact-details-edit");
+            mav.addObject("contact", contact);
+            mav.addObject("contactId", id);
+            return mav;
+        }
+
+        logger.info("Id to edit Post method " + id);
+        contactService.addContact(contact);
+
+        logger.info("Contact created edited");
 
         ModelAndView modelAndView = new ModelAndView("redirect:/app/secure/contact-details");
 

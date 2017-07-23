@@ -31,7 +31,8 @@
             <td>Last Name</td>
             <td>
                 <input type="text" th:field="*{lastName}"/>
-                <label th:if="${#fields.hasErrors('lastName')}" th:text="#{error.contact.lastName}" th:class="'error'">Last Name Error</label>
+                <label th:if="${#fields.hasErrors('lastName')}"
+                       th:text="#{error.contact.lastName}" th:class="'error'">Last Name Error</label>
             </td>
         </tr>
 
@@ -39,7 +40,8 @@
             <td>Cell phone</td>
             <td>
                 <input type="text" th:field="*{cellPhone}"/>
-                <label th:if="${#fields.hasErrors('cellPhone')}" th:text="#{error.contact.cellPhone}" th:class="'error'">Cell phone Error</label>
+                <label th:if="${#fields.hasErrors('cellPhone')}"
+                       th:text="#{error.contact.cellPhone}" th:class="'error'">Cell phone Error</label>
             </td>
         </tr>
 
@@ -54,7 +56,8 @@
             <td>Mail</td>
             <td>
                 <input type="text" th:field="*{mail}"/>
-                <label th:if="${#fields.hasErrors('mail')}" th:text="#{error.contact.mail}" th:class="'error'">Mail Error</label>
+                <label th:if="${#fields.hasErrors('mail')}"
+                       th:text="#{error.contact.mail}" th:class="'error'">Mail Error</label>
             </td>
         </tr>
 
