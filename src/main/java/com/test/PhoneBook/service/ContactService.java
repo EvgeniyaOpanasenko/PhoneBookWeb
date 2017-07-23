@@ -11,11 +11,12 @@ public interface ContactService {
     @Secured({"ROLE_ADMIN"})
     List<Contact> getAllContacts();
 
-    Contact addContact(Contact contact) throws SuchContactsExistAllredyException;
+    boolean addContact(Contact contact) throws SuchContactsExistAllredyException;
 
     void deleteContact(Long id);
 
     List<Contact> getAllContactsByCurrentlyLoggedInUser();
 
     Contact findOne(long id);
+
 }

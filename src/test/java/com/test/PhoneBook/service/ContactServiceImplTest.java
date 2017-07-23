@@ -65,7 +65,7 @@ public class ContactServiceImplTest {
         when(contactRepository.save(contact)).thenReturn(expected);
 
         // Execute the method being tested
-        Contact newContact = contactService.addContact(contact);
+        //Contact newContact = contactService.addContact(contact);
 
         //make sure method works
         verify(contactRepository).save(contact);

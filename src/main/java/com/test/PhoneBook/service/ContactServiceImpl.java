@@ -41,14 +41,15 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact addContact(Contact contact) throws SuchContactsExistAllredyException {
+    public boolean addContact(Contact contact) throws SuchContactsExistAllredyException {
         if (getAllContacts().stream()
                 .filter(contact1 -> contact1.getFirstName()
                         .equals(contact.getFirstName())).findFirst().isPresent()) {
             throw new SuchContactsExistAllredyException("Pick other name");
         }
         contact.setUser(getCurrentlyLoggedInUser());
-        return contactRepository.save(contact);
+        contactRepository.save(contact);
+        return true;
     }
 
     @Override
@@ -73,6 +74,8 @@ public class ContactServiceImpl implements ContactService {
     public Contact findOne(long id) {
         return contactRepository.findOne(id);
     }
+
+
 
     private String getLoggedInUserName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
