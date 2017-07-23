@@ -1,6 +1,6 @@
 package com.test.PhoneBook.config;
 
-import com.test.PhoneBook.dao.UserRepository;
+import com.test.PhoneBook.repository.UserRepository;
 import com.test.PhoneBook.model.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

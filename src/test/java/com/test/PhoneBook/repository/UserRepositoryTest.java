@@ -1,4 +1,4 @@
-package com.test.PhoneBook.dao;
+package com.test.PhoneBook.repository;
 
 import com.test.PhoneBook.model.UserDto;
 import org.junit.Before;
@@ -13,7 +13,6 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace.NONE;
 
 
 @RunWith(SpringRunner.class)

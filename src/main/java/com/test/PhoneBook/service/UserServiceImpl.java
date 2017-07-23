@@ -1,6 +1,6 @@
 package com.test.PhoneBook.service;
 
-import com.test.PhoneBook.dao.UserRepository;
+import com.test.PhoneBook.repository.UserRepository;
 import com.test.PhoneBook.model.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

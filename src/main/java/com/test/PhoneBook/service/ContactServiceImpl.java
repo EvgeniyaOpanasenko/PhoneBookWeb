@@ -1,7 +1,7 @@
 package com.test.PhoneBook.service;
 
-import com.test.PhoneBook.dao.ContactRepository;
-import com.test.PhoneBook.dao.UserRepository;
+import com.test.PhoneBook.repository.ContactRepository;
+import com.test.PhoneBook.repository.UserRepository;
 import com.test.PhoneBook.exceptions.SuchContactsExistAllredyException;
 import com.test.PhoneBook.model.Contact;
 import com.test.PhoneBook.model.UserDto;

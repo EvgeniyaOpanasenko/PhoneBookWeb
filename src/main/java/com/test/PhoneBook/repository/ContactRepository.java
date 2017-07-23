@@ -1,4 +1,4 @@
-package com.test.PhoneBook.dao;
+package com.test.PhoneBook.repository;
 
 import com.test.PhoneBook.model.Contact;
 import org.springframework.data.repository.PagingAndSortingRepository;
