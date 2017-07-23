@@ -29,7 +29,7 @@ public class Contact implements Serializable {
     private String lastName;
 
     @NotNull
-    @Pattern(regexp = "^(\\+\\d{1,2}\\s)?\\(?\\d{3}\\)?[\\s.-]\\d{3}[\\s.-]\\d{4}$")
+    @Pattern(regexp = "\\([0-9]{3}\\)\\s[0-9]{3}-[0-9]{2}-[0-9]{2}")
     private String cellPhone;
 
     private String homePhone;

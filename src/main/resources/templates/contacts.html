@@ -15,11 +15,11 @@
         <th>Id</th>
         <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" text-decoration:="none" style="color: black">First Name</a></th>
         <th><a th:href="@{/app/secure/contact-details/sort/byLastName}" text-decoration:="none" style="color: black">Last Name</a></th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byPatronymicName}" text-decoration:="none" style="color: black">Patronymic Name</a></th>
+        <th>Patronymic Name</th>
         <th><a th:href="@{/app/secure/contact-details/sort/byCellPhone}" text-decoration:="none" style="color: black">Cell Phone</a></th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byHomePhone}" text-decoration:="none" style="color: black">Home Phone</a></th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byAddress}" text-decoration:="none" style="color: black">Address</a></th>
-        <th><a th:href="@{/app/secure/contact-details/sort/byMail}" text-decoration:="none" style="color: black">Mail</a></th>
+        <th>Home Phone</th>
+        <th>Address</th>
+        <th>Mail</th>
         <th>Options</th>
     </tr>
     <tr th:each="contact : ${userContacts}">

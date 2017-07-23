@@ -54,17 +54,6 @@ public class ContactViewController {
         return mav;
     }
 
-    @GetMapping("secure/contact-details/sort/byPatronymicName")
-    public ModelAndView sortByPatronymicName() {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("userContacts",
-                contactService.sortBybyPatronymicName());
-        mav.setViewName("contacts");
-        logger.info("All contacts collected for USER");
-
-        return mav;
-    }
-
     @GetMapping("secure/contact-details/sort/byCellPhone")
     public ModelAndView sortByCellPhone() {
         ModelAndView mav = new ModelAndView();
