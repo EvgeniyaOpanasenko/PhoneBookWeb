@@ -1,5 +1,6 @@
 package com.test.PhoneBook.service;
 
+import com.mysql.fabric.xmlrpc.base.Data;
 import com.test.PhoneBook.dao.ContactRepository;
 import com.test.PhoneBook.dao.UserRepository;
 import com.test.PhoneBook.exceptions.SuchContactsExistAllredyException;
@@ -8,6 +9,7 @@ import com.test.PhoneBook.model.UserDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -75,6 +77,12 @@ public class ContactServiceImpl implements ContactService {
         return contactRepository.findOne(id);
     }
 
+    @Override
+    public List<Contact> sortByFirstName() {
+        Sort sort = new Sort(Sort.Direction.ASC, "firstName");
+        List<Contact> contacts = (List<Contact>) contactRepository.findAll(sort);
+        return (List<Contact>) contactRepository.findAll(sort);
+    }
 
 
     private String getLoggedInUserName() {

@@ -12,13 +12,13 @@
 <table>
     <tr>
         <th>Id</th>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Patronymic Name</th>
-        <th>Cell Phone</th>
-        <th>Home Phone</th>
-        <th>Address</th>
-        <th>Mail</th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" class="btn btn-danger">First Name</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byLastName}" class="btn btn-danger">Last Name</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byPatronymicName}" class="btn btn-danger">Patronymic Name</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" class="btn btn-danger">Cell Phone</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" class="btn btn-danger">Home Phone</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" class="btn btn-danger">Address</a></th>
+        <th><a th:href="@{/app/secure/contact-details/sort/byFirstName}" class="btn btn-danger">Mail</a></th>
         <th>Options</th>
     </tr>
     <tr th:each="contact : ${userContacts}">

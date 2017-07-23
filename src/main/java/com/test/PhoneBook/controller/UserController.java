@@ -1,5 +1,6 @@
 package com.test.PhoneBook.controller;
 
+import com.test.PhoneBook.model.Contact;
 import com.test.PhoneBook.service.ContactService;
 import com.test.PhoneBook.service.UserService;
 import org.slf4j.Logger;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("app")
@@ -27,6 +30,17 @@ public class UserController {
 
         mav.addObject("userContacts",
                 contactService.getAllContactsByCurrentlyLoggedInUser());
+        mav.setViewName("contacts");
+        logger.info("All contacts collected for USER");
+
+        return mav;
+    }
+
+    @GetMapping("secure/contact-details/sort/byFirstName")
+    public ModelAndView sortByFirstName() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("userContacts",
+                contactService.sortByFirstName());
         mav.setViewName("contacts");
         logger.info("All contacts collected for USER");
 

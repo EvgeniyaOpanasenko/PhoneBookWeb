@@ -19,4 +19,5 @@ public interface ContactService {
 
     Contact findOne(long id);
 
+    List<Contact> sortByFirstName();
 }
